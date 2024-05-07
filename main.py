@@ -38,7 +38,7 @@ async def create_task(task: Task):
         task_id = str(uuid.uuid4())
         print(f'New task: {task_id}')
         tasks[task_id] = "running"
-        await asyncio.create_task(task_worker(task_id, task.duration))
+        asyncio.create_task(task_worker(task_id, task.duration))
         print(tasks[task_id])
         return JSONResponse(content={'task_id': task_id})
     except ValidationError as exc:
